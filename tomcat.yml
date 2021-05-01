@@ -1,0 +1,37 @@
+---
+- name: to install tomcat
+  hosts: appserver
+  become: true
+  tasks:
+  - name: to check java status
+    shell: which java | grep | wc -l
+    register: java_check
+
+  - name: to install java
+    yum:
+      name: java-1.8.0-openjdk-devel
+    when: java_check.stdout=="0"
+
+  - name: to download tar file
+    get_url:
+      url: https://mirrors.ocf.berkeley.edu/apache/tomcat/tomcat-8/v8.5.65/bin/apache-tomcat-8.5.65.tar.gz
+      dest: /opt/
+
+  - name: to etract tar file
+    unarchive:
+      src: /opt/apache-tomcat-8.5.65.tar.gz
+      dest: /opt/
+      remote_src: true
+
+  - name: to rename tomcat 
+    shell: mv /opt/apache-tomcat-8.5.65 /opt/tomcat
+
+  - name: to create system d file
+    template:
+      src: templates/tomcat.j2
+      dest: /etc/systemd/system/tomcat.service  
+
+  - name: to reload daemon
+    shell: sudo systemctl daemon-reload
+
+
