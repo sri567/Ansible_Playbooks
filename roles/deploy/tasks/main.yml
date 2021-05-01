@@ -1,6 +1,7 @@
 ---
 - name: to deploy war file
   copy:
-    src: /home/ec2-user/SampleWebApp.war
+    #src: /home/ec2-user/SampleWebApp.war
+    src: target/*.war
     dest: /opt/tomcat/webapps/
 
