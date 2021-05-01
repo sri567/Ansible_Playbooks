@@ -8,13 +8,16 @@ stages{
 
 stage("mavn package")
 {
+steps{
 sh ''' mvn package '''
+}
 }
 
 stage("archive")
 {
-
+steps{
 archiveArtifacts artifacts: 'target/*.war'
+}
 }
 
 }
