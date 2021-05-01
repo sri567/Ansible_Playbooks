@@ -1,3 +1,21 @@
 pipeline{
-agent 
+agent any
+environment {
+path="/opt/apache-maven-3.6.3/bin:$PATH"
+}
+
+stages{
+
+stage("mavn package")
+{
+sh ''' mvn package '''
+}
+
+stage("archive")
+{
+
+archiveArtifacts artifacts: 'target/*.war'
+}
+
+}
 }
