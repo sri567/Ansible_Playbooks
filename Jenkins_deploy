@@ -1,0 +1,11 @@
+pipeline{
+agent any
+stages{
+stage("copy artifact")
+{
+ steps {
+        copyArtifacts(filter:'target/*.war', projectName: 'Warfile', selector: lastSuccessful())
+    }
+}
+}
+}
