@@ -7,5 +7,12 @@ stage("copy artifact")
         copyArtifacts(filter:'target/*.war', projectName: 'Warfile', selector: lastSuccessful())
     }
 }
+
+stage("deployment"){
+steps{
+sh ''' ansible-playbook deployment.yml '''
+}
+}
+
 }
 }
