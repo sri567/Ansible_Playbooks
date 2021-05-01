@@ -1,0 +1,9 @@
+---
+- name: to deploy
+  hosts: appserver
+  become: true
+  roles:
+   - stop
+   - backup
+   - deploy
+   - start
