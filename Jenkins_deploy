@@ -10,7 +10,7 @@ stage("copy artifact")
 
 stage("deployment"){
 steps{
-sh ''' ansible-playbook deployment.yml '''
+ sh ''' ansible-playbook deployment.yml '''
 }
 }
 
